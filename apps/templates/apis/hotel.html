@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Smart Hotel Demo</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/full-width-pics.css' %}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.datetimepicker.css' %}">
+    <style>
+    .btn-message {
+        border: none;
+        background-color: inherit;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn-message:hover {background: #eee;}
+
+    .success {color: green;}
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Smart Hotel Demo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header - set the background image for the header in the line below -->
+  <header class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1031');">
+    <img class="img-fluid d-block mx-auto" style="width: 200px; height: 200px" src="{% static 'images/sac/sac.png' %}" alt="">
+  </header>
+  <!-- Content section -->
+      <section class="py-5">
+        <div class="container">
+          <h1 style="text-align:center;">Check in form</h1>
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-10 col-xl-9 mx-auto">
+                          <div class="card card-signin flex-row my-5">
+                                  <div class="card-img-left d-none d-md-flex">
+                                      <!-- Background image for card set in CSS! -->
+                                  </div>
+                              <div class="card-body">
+                                  {% if form %}
+                                  <form class="form-signin" action="{% url 'home' %}" method="post">
+                                      {% csrf_token %}
+                                      <div class="form-label-group">
+                                          <input type="text" name="{{ form.name.name }}" id="inputUserame" class="form-control" placeholder="Guest name" required autofocus>
+                                          <label for="inputUserame">Guest Name</label>
+                                      </div>
+                                      <div class="form-label-group">
+                                          <input type="email" name="{{ form.email.name }}" id="inputEmail" class="form-control" placeholder="Guest Email" required>
+                                          <label for="inputEmail">Guest Email Address</label>
+                                      </div>
+                                      <div class="form-label-group" >
+                                          <input style="padding-left: 10px; margin-left:10px" type="checkbox" name="{{ form.reservation.name }}" id="inputParking" placeholder="Parking">
+                                          <label style="font-size:18px; margin-left:20px;" for="inputParking">Parking reservation</label>
+                                      </div>
+                                      <hr>
+                                      <div class="form-label-group">
+                                          <input type="text" name="{{ form.valid_from.name }}" id="inputValidFrom" class="form-control" placeholder="Check-in" required>
+                                          <label for="inputValidFrom">Check-in</label>
+                                      </div>
+                                      <div class="form-label-group">
+                                          <input type="text" name="{{ form.valid_until.name }}" id="inputValidUntil" class="form-control" placeholder="Check-out" required>
+                                          <label for="inputValidUntil">Check-out</label>
+                                      </div>
+
+                                      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Reserve</button>
+                                      <hr class="my-4">
+                                  </form>
+                                  {% elif output.checked_in%}
+                                    CHECKED IN! <br>
+                                    Parking reservation: <div id="parking-notification">{{ output.parking_reserved }}</div>
+                                                                    <div id="payment-notification">
+                                  </div>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  {% else %}
+                                  Unable to reserve parking place.
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                                  <br>
+                              {% endif %}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+        </div>
+      </section>
+
+  <!-- Image Section - set the background image for the header in the line below -->
+  <section class="py-5 bg-image-full" style="background-image: url('https://unsplash.it/1900/1080?image=1029');">
+    <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+    <div style="height: 200px;"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Smart Access Control 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'css/jquery.js' %}"></script>
+  <script src="{% static 'css/jquery.datetimepicker.full.min.js' %}"></script>
+  <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
+  <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
+
+  <script>
+      jQuery('#inputValidFrom').datetimepicker();
+      jQuery('#inputValidUntil').datetimepicker();
+  </script>
+  <script>
+      var es = new ReconnectingEventSource('/events/');
+        var firstConnect = true;
+        es.onopen = function () {
+          if(!firstConnect) {
+            console.log('*** connected');
+          }
+          firstConnect = false;
+        };
+        es.onerror = function () {
+          console.log('*** connection lost, reconnecting...');
+        };
+        es.addEventListener('stream-reset', function () {
+          console.log('*** client too far behind, please refresh');
+        }, false);
+        es.addEventListener('stream-error', function (e) {
+          // hard stop
+          es.close();
+          e = JSON.parse(e.data);
+          console.log('*** stream error: ' + e.condition + ': ' + e.text);
+        }, false);
+        es.addEventListener('message', function (e) {
+          console.log('event: ' + e.data);
+          msg = JSON.parse(e.data);
+          if (msg["status"] === "reserved") {
+          var element = document.getElementById("parking-notification");
+                element.innerHTML = "<b>DONE!";
+
+              var log = $('#payment-notification');
+               log.append('<br><b>Payment address</b><br>' + msg["payment_address"]);
+               log.append('<br><b>Payment amount</b><br> ' + msg["payment_amount"]);
+               log.append('<br><b>Payment id</b><br>' + msg["payment_id"]);
+          }
+        }, false);
+  </script>
+</body>
+
+</html>
